@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stationary_table</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        background-image: url('https://img.freepik.com/free-photo/edge-yellow-wall-pencils-paper-rat-clips-clocks-lie-chaotically-beautifully_197531-12536.jpg?w=996&t=st=1682716696~exp=1682717296~hmac=180cfec795e01db1b0c856c9f0be48f49324c6b637660075817275b311c74f4c');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .l {
+        text-align: center;
+        font-size: 30px;
+        font-family: sans-serif;
+    }
+
+    table,
+    th,
+    td {
+        border: 5px solid black;
+        height: 60%;
+        align-items: center;
+    }
+
+    td {
+        font-size: 20px;
+    }
+
+    th {
+        background-color: grey;
+        color: white;
+    }
+
+    td {
+        backdrop-filter: blur(8px);
+    }
+
+    .l {
+        color: black;
+        font-size: 20px;
+        text-decoration: none;
+        text-decoration: underline;
+    }
+
+    .t {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    h2 {
+        text-decoration: underline;
+    }
+
+    #o {
+        background-color: black;
+        color: white;
+        padding: 25px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="o">
+        <h3>hello You are using this app for sell or rent your property</h3>
+    </div>
+    <br>
+    <br>
+    <div class='t'>
+        <br>
+        <table style="width:90%">
+            <tr>
+                <th style="width:10%">S.NO.</th>
+                <th style="width:20%">NAME</th>
+                <th style="width:20%">NUMBER</th>
+                <th style="width:20%">ADDRESS</th>
+                <th style="width:20%">LINK</th>
+                <th style="width:20%">SHOP NAME</th>
+                <th style="width:20%">DESCRIPTION</th>
+
+            </tr>
+            <tbody id="table_body">
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+    </div>
+    </div>
+    <script>
+        let p = fetch("/fin");
+        p.then((data) => {
+            return data.json();
+        }).then((objectData) => {
+            console.log(objectData[0].title);
+            let tabledata = ""
+            let count = 0;
+            objectData.map((values) => {
+                count++;
+                tabledata += ` <tr>
+          <td>${count}</td>
+          <td>${values.name}</td>
+          <td>${values.number}</td>
+          <td>${values.address}</td>
+          <td>${values.link}</td>
+          <td>${values.shop_name}</td>
+          <td>${values.description}</td>
+
+        </tr>`
+            });
+            document.getElementById("table_body").innerHTML = tabledata;
+
+        })
+    </script>
+</body>
+
+</html>
